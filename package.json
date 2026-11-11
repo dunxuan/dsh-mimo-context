@@ -1,0 +1,59 @@
+{
+  "name": "dsh-mimo-context",
+  "version": "0.6.0",
+  "description": "MiMo Code-style infinite context for DeepSeek Harness: threshold checkpoints, watermark writer, MiMo rebuild-context dump, session/project/global memory, and ordinary-compaction fallback.",
+  "type": "module",
+  "main": "index.js",
+  "exports": {
+    ".": "./index.js",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "index.js",
+    "lib",
+    "cordis.patch.yml",
+    "docs",
+    "README.md",
+    "LICENSE"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dunxuan/dsh-mimo-context.git"
+  },
+  "homepage": "https://github.com/dunxuan/dsh-mimo-context#readme",
+  "bugs": {
+    "url": "https://github.com/dunxuan/dsh-mimo-context/issues"
+  },
+  "author": "dunxuan",
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  },
+  "keywords": [
+    "deepseek-harness",
+    "dsh",
+    "dsh-plugin",
+    "context",
+    "compaction",
+    "memory",
+    "checkpoint",
+    "mimo"
+  ],
+  "license": "MIT",
+  "engines": {
+    "node": ">=20"
+  },
+  "peerDependencies": {
+    "@deepseek-ai/cordis": "^4.0.1",
+    "@deepseek-ai/dsh-compaction": ">=0.2.2-rc.1 <0.3.0",
+    "@deepseek-ai/dsh-llm": ">=0.2.2-rc.1 <0.3.0",
+    "@deepseek-ai/dsh-session": ">=0.2.2-rc.1 <0.3.0",
+    "@deepseek-ai/dsh-tools": ">=0.2.2-rc.1 <0.3.0",
+    "@deepseek-ai/dsh-util-values": ">=0.2.2-rc.1 <0.3.0"
+  }
+}
+
+
+
+
