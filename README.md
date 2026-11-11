@@ -8,16 +8,36 @@ MiMo Code 风格的「无限上下文」移植插件（DeepSeek Harness 0.2.2-rc
 
 1. **提前写结构化状态**：按 MiMo 的窗口阶梯（≤200K 为 20/40/60/80%；≤500K 每 10%；>500K 每 5%）在后台写 `checkpoint.md`（11 段）和项目 `MEMORY.md`（4 段），并维护 `notes.md`、`tasks/<id>/progress.md`。
 2. **重建窗口**：在 DSH 原生 compaction 之前，用真实 compaction 事务把整个可见窗口替换为一份 MiMo `renderRebuildContext` dump（tasks / checkpoint / recent user / 项目+全局 memory / notes / memory index / recent activity / seam framing / tail reminder），并把未回复用户消息原文复制到 boundary。
-3. **重建优先，压缩兜底**：只有「没有可用 checkpoint 且 writer 失败 / 写入被禁用」时才走 MiMo 五段式 ordinary compaction；有 checkpoint 但插入失败时禁止 compaction（与 MiMo 一致）。原生 DSH compaction 仍是最后兜底。
+3. **重建优先，压缩兜底**：只有「没有可用 checkpoint 且 writer 失败 / 写入被禁用」时才走 MiMo 五段式 ordinary compaction；有 checkpoint 但插入失败时插件不再追加摘要（DSH 原生 compaction 仍是最后兜底，插件的 prepend 只保证先跑、无法 veto 原生）。
 
 ## 安装
 
+前置：全局 `dsh` CLI 需为 **0.2.2-rc.1**（`dsh --version` 确认；旧版 0.1.x 读不了当前 profile）。升级：
 ```powershell
-# 用该 DSH 安装自带的 0.2.2 CLI（不要用全局旧版 dsh）
+pnpm add -g @deepseek-ai/dsh@0.2.2-rc.1
+```
+
+从 GitHub 安装（推荐）：
+```powershell
+dsh plugin --profile desktop add github:dunxuan/dsh-mimo-context
+```
+
+本地路径安装：
+```powershell
 dsh plugin --profile desktop add file:D:\path\to\dsh-mimo-context\plugin
 ```
 
-`dsh plugin add` 会同时写入依赖与 bundle 行（本包的 `dsh.bundle.patch` 自动挂载 `mimo-context` 行）。重启 DSH 后生效。`dsh --profile <p> --dump-config | Select-String mimo-context` 可确认组合。
+钉版本（tag / commit）：
+```powershell
+dsh plugin --profile desktop add github:dunxuan/dsh-mimo-context#v0.6.0
+```
+
+`dsh plugin add` 把参数原样转给 **profile 目录里的 pnpm**，同时写入依赖与 bundle 行（本包的 `dsh.bundle.patch` 自动挂载 `mimo-context` 行）。裸跑 `pnpm add` 只写依赖、不挂载。重启 DSH 后生效。`dsh --profile <p> --dump-config | Select-String mimo-context` 可确认组合。
+
+卸载：
+```powershell
+dsh plugin --profile desktop remove dsh-mimo-context
+```
 
 ## 配置
 
