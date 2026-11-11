@@ -25,6 +25,10 @@
     "url": "https://github.com/dunxuan/dsh-mimo-context/issues"
   },
   "author": "dunxuan",
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
+  },
   "dsh": {
     "bundle": {
       "patch": "./cordis.patch.yml"

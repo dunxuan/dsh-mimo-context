@@ -17,19 +17,25 @@ MiMo Code 风格的「无限上下文」移植插件（DeepSeek Harness 0.2.2-rc
 pnpm add -g @deepseek-ai/dsh@0.2.2-rc.1
 ```
 
-从 GitHub 安装（推荐）：
+从 npm registry 安装（和大多数 pnpm 包一样，最常用）：
+```powershell
+dsh plugin --profile desktop add dsh-mimo-context
+
+# 钉版本
+dsh plugin --profile desktop add dsh-mimo-context@0.6.0
+```
+
+从 GitHub 安装（拿最新未发版代码 / 等不及镜像同步时）：
 ```powershell
 dsh plugin --profile desktop add github:dunxuan/dsh-mimo-context
+
+# 钉 tag / commit
+dsh plugin --profile desktop add github:dunxuan/dsh-mimo-context#v0.6.0
 ```
 
-本地路径安装：
+本地路径安装（改代码调试）：
 ```powershell
 dsh plugin --profile desktop add file:D:\path\to\dsh-mimo-context\plugin
-```
-
-钉版本（tag / commit）：
-```powershell
-dsh plugin --profile desktop add github:dunxuan/dsh-mimo-context#v0.6.0
 ```
 
 `dsh plugin add` 把参数原样转给 **profile 目录里的 pnpm**，同时写入依赖与 bundle 行（本包的 `dsh.bundle.patch` 自动挂载 `mimo-context` 行）。裸跑 `pnpm add` 只写依赖、不挂载。重启 DSH 后生效。`dsh --profile <p> --dump-config | Select-String mimo-context` 可确认组合。
