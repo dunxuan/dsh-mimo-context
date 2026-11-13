@@ -1,6 +1,6 @@
 {
   "name": "dsh-mimo-context",
-  "version": "0.6.0",
+  "version": "0.6.1",
   "description": "MiMo Code-style infinite context for DeepSeek Harness: threshold checkpoints, watermark writer, MiMo rebuild-context dump, session/project/global memory, and ordinary-compaction fallback.",
   "type": "module",
   "main": "index.js",
@@ -14,7 +14,8 @@
     "cordis.patch.yml",
     "docs",
     "README.md",
-    "LICENSE"
+    "LICENSE",
+    "NOTICE"
   ],
   "repository": {
     "type": "git",
